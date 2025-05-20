@@ -1,4 +1,4 @@
-import React from "react";
+
 import { updateJsonData } from "../utils/helper";
 
 const FileUpload = ({ records, updateData }) => {
@@ -10,7 +10,7 @@ const FileUpload = ({ records, updateData }) => {
         const contents = e.target.result;
         try {
           const jsonData = JSON.parse(contents);
-          console.log("Parsed JSON:", jsonData);
+          
           const mergedRecords = updateJsonData(records, jsonData);
           updateData(mergedRecords);
         } catch (error) {

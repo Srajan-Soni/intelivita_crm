@@ -14,7 +14,6 @@ const RecordsTable = ({ filteredData, updateData }) => {
   const handleDelete = (id) => {
     const updated = filteredData.filter((r) => r.id !== id);
     updateData(updated);
-
     if (currentData.length === 1 && currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
@@ -28,35 +27,32 @@ const RecordsTable = ({ filteredData, updateData }) => {
   };
 
   return (
-    <div className="overflow-x-auto">
-      <div className="min-w-full rounded-lg shadow-md border border-gray-200">
-        <table className="min-w-full bg-white text-sm text-left text-gray-600">
-          <thead className="bg-blue-100 text-gray-700 sticky top-0">
+    <div className="overflow-x-auto w-full">
+      <div className="w-full rounded-lg shadow border border-gray-200">
+        <table className="w-full bg-white text-sm text-left text-gray-700">
+          <thead className="bg-blue-100 text-gray-800">
             <tr>
-              <th className="px-6 py-3 font-semibold border-b">ID</th>
-              <th className="px-6 py-3 font-semibold border-b">Name</th>
-              <th className="px-6 py-3 font-semibold border-b">Email</th>
-              <th className="px-6 py-3 font-semibold border-b text-center">Actions</th>
+              <th className="px-4 py-3 font-semibold">ID</th>
+              <th className="px-4 py-3 font-semibold">Name</th>
+              <th className="px-4 py-3 font-semibold">Email</th>
+              <th className="px-4 py-3 font-semibold text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             {currentData.map((record) => (
-              <tr
-                key={record.id}
-                className="hover:bg-gray-50 transition duration-150 ease-in-out"
-              >
-                <td className="px-6 py-4 border-b">{record.id}</td>
-                <td className="px-6 py-4 border-b">{record.name}</td>
-                <td className="px-6 py-4 border-b">{record.email}</td>
-                <td className="px-6 py-4 border-b flex justify-center gap-2">
+              <tr key={record.id} className="hover:bg-gray-50 transition">
+                <td className="px-4 py-3 border-t">{record.id}</td>
+                <td className="px-4 py-3 border-t">{record.name}</td>
+                <td className="px-4 py-3 border-t break-words max-w-xs">{record.email}</td>
+                <td className="px-4 py-3 border-t flex flex-wrap justify-center gap-2">
                   <button
-                    className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-3 py-1 rounded-md text-xs shadow-sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-md text-xs"
                     onClick={() => setEditing(record)}
                   >
                     Edit
                   </button>
                   <button
-                    className="bg-red-500 hover:bg-red-600 cursor-pointer text-white px-3 py-1 rounded-md text-xs shadow-sm"
+                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs"
                     onClick={() => handleDelete(record.id)}
                   >
                     Delete
@@ -75,11 +71,13 @@ const RecordsTable = ({ filteredData, updateData }) => {
         </table>
       </div>
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
+      <div className="mt-4">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </div>
 
       {editing && (
         <EditModal
