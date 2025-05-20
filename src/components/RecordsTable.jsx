@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import EditModal from './EditModal';
+import Pagination from './Pagination';
 
 const RecordsTable = ({ filteredData, updateData }) => {
   const [editing, setEditing] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
- 
+  const recordsPerPage = 5;
+
+  const totalPages = Math.ceil(filteredData.length / recordsPerPage);
+  const startIndex = (currentPage - 1) * recordsPerPage;
+  const currentData = filteredData.slice(startIndex, startIndex + recordsPerPage);
 
   const handleDelete = (id) => {
     const updated = filteredData.filter((r) => r.id !== id);
     updateData(updated);
+
+    if (currentData.length === 1 && currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   const handleEditSave = (updatedRecord) => {
@@ -31,7 +40,7 @@ const RecordsTable = ({ filteredData, updateData }) => {
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((record) => (
+            {currentData.map((record) => (
               <tr
                 key={record.id}
                 className="hover:bg-gray-50 transition duration-150 ease-in-out"
@@ -55,18 +64,22 @@ const RecordsTable = ({ filteredData, updateData }) => {
                 </td>
               </tr>
             ))}
-            {/* {currentData.length === 0 && (
+            {currentData.length === 0 && (
               <tr>
                 <td colSpan="4" className="text-center py-6 text-gray-400">
                   No records found.
                 </td>
               </tr>
-            )} */}
+            )}
           </tbody>
         </table>
       </div>
 
-   
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
 
       {editing && (
         <EditModal

@@ -14,14 +14,15 @@ export const setData = (data) => {
 
 export const uniqueRecords = (records) => {
   const uniqueEmails = new Set();
-  return records.filter((record) => {
+   const result = records.filter((record) => {
     if (!uniqueEmails.has(record.email)) {
       uniqueEmails.add(record.email);
       return true;
     }
     return false;
   });
-  console.log('Unique Records:', uniqueRecords);
+  return result; 
+  
 };
 
 export const updateJsonData = (existingData,newData) => {

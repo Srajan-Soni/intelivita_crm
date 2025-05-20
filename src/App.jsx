@@ -17,28 +17,44 @@ function App() {
     const data = getData();
     if (data) {
       setJsonData(data);
+      setFilteredData(data); 
     }
   }, []);
 
   const updateData = (data) => {
-    setJsonData(data);
-    setData(data);
+  setJsonData(data);
+  setData(data);
+
+  
+  if (search.trim() === "") {
     setFilteredData(data);
-
-    console.log("Updated JSON:", data);
-  };
-
-   const handleSearch = (term) => {
-    setSearch(term);
-    const lower = term.toLowerCase();
-    const filtered = jsonData.filter(
+  } else {
+    const lower = search.toLowerCase();
+    const filtered = data.filter(
       (rec) =>
         rec.id.toString().includes(lower) ||
         rec.name.toLowerCase().includes(lower) ||
         rec.email.toLowerCase().includes(lower)
     );
     setFilteredData(filtered);
-  };
+  }
+
+  console.log("Updated JSON:", data);
+};
+
+
+   const handleSearch = (term) => {
+  setSearch(term);
+  const lower = term.toLowerCase();
+  const filtered = jsonData.filter(
+    (rec) =>
+      rec.id.toString().includes(lower) ||
+      rec.name.toLowerCase().includes(lower) ||
+      rec.email.toLowerCase().includes(lower)
+  );
+  setFilteredData(filtered);
+};
+
 
   return (
     <>
