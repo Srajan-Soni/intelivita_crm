@@ -50,13 +50,13 @@ const RecordsTable = ({ filteredData, updateData }) => {
                 <td className="px-6 py-4 border-b">{record.email}</td>
                 <td className="px-6 py-4 border-b flex justify-center gap-2">
                   <button
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-md text-xs shadow-sm"
+                    className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-3 py-1 rounded-md text-xs shadow-sm"
                     onClick={() => setEditing(record)}
                   >
                     Edit
                   </button>
                   <button
-                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs shadow-sm"
+                    className="bg-red-500 hover:bg-red-600 cursor-pointer text-white px-3 py-1 rounded-md text-xs shadow-sm"
                     onClick={() => handleDelete(record.id)}
                   >
                     Delete

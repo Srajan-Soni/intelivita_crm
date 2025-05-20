@@ -23,8 +23,21 @@ const FileUpload = ({ records, updateData }) => {
   return (
     <div>
       <div className="mb-4">
-        <label className="block mb-1 font-semibold">Upload JSON File</label>
-        <input type="file" accept=".json" onChange={handleFileChange} />
+          <label htmlFor="file-upload" className="cursor-pointer inline-block">
+        <img
+          src={"https://png.pngtree.com/png-clipart/20190921/original/pngtree-file-upload-icon-png-image_4717174.jpg"}
+          alt="Upload JSON"
+          className="w-16 h-16 mx-auto hover:scale-105 transition"
+        />
+        <p className="text-sm text-gray-600 mt-2 font-medium">Click to Upload JSON</p>
+      </label>
+      <input
+        id="file-upload"
+        type="file"
+        accept=".json"
+        onChange={handleFileChange}
+        className="hidden"
+      />
       </div>
     </div>
   );

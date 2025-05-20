@@ -11,7 +11,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           <button
             key={pageNum}
             onClick={() => onPageChange(pageNum)}
-            className={`px-3 py-1 rounded-md text-sm transition font-medium ${
+            className={`px-3 py-1 rounded-md text-sm transition hover:cursor-pointer font-medium ${
               currentPage === pageNum
                 ? 'bg-blue-600 text-white shadow'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'

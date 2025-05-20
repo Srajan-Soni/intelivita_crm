@@ -10,8 +10,7 @@ function App() {
   const [jsonData, setJsonData] = useState([]);
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     const data = getData();
@@ -31,10 +30,10 @@ function App() {
   } else {
     const lower = search.toLowerCase();
     const filtered = data.filter(
-      (rec) =>
-        rec.id.toString().includes(lower) ||
-        rec.name.toLowerCase().includes(lower) ||
-        rec.email.toLowerCase().includes(lower)
+      (record) =>
+        record.id.toString().includes(lower) ||
+        record.name.toLowerCase().includes(lower) ||
+        record.email.toLowerCase().includes(lower)
     );
     setFilteredData(filtered);
   }
@@ -43,14 +42,14 @@ function App() {
 };
 
 
-   const handleSearch = (term) => {
-  setSearch(term);
-  const lower = term.toLowerCase();
+   const handleSearch = (text) => {
+  setSearch(text);
+  const lower = text.toLowerCase();
   const filtered = jsonData.filter(
-    (rec) =>
-      rec.id.toString().includes(lower) ||
-      rec.name.toLowerCase().includes(lower) ||
-      rec.email.toLowerCase().includes(lower)
+    (record) =>
+      record.id.toString().includes(lower) ||
+      record.name.toLowerCase().includes(lower) ||
+      record.email.toLowerCase().includes(lower)
   );
   setFilteredData(filtered);
 };
@@ -69,12 +68,12 @@ function App() {
           </div>
 
           <div>
-            <h1>Search Records</h1>
+            <h1 className="text-xl py-2 my-2 font-bold">Search Records</h1>
             <div className="mb-4">
               <input
                 type="text"
-                placeholder="Search by ID, Name, Email..."
-                className="border p-2 w-full"
+                placeholder="Search by id, Name or Email"
+                className="border p-2 w-full border-gray-300 rounded-md"
                 value={search}
                 onChange={(e) => handleSearch(e.target.value)}
               />
